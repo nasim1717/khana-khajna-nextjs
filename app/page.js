@@ -1,7 +1,11 @@
+import HeroSection from "@/components/home/HeroSection";
+import Recipes from "@/components/home/Recipes";
+
 export default function HomePage() {
   return (
-    <div className="text-red-600">
-      Project set-up and testing
-    </div>
+    <main>
+      <HeroSection />
+      <Recipes />
+    </main>
   );
 }
