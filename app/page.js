@@ -1,3 +1,4 @@
+
 import HeroSection from "@/components/home/HeroSection";
 import Recipes from "@/components/home/Recipes";
 
