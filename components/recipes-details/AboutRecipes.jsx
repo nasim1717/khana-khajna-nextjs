@@ -1,14 +1,9 @@
-export default function AboutRecipes() {
+export default function AboutRecipes({ recipeDetails }) {
   return (
     <>
-      <h2 className="font-semibold text-4xl lg:w-8/12 leading-10">
-        White calzones with marinara sauce
-      </h2>
-      <p className="text-xs text-[#eb4a36] italic my-2">Breakfast and Brunch</p>
-      <p className="text-gray-600 text-sm my-6 leading-6">
-        Supermarket brands of ricotta contain stabilizers, which can give the cheese a gummy texture
-        when baked. Check the label and choose ricotta made with as few ingredients as possible.
-      </p>
+      <h2 className="font-semibold text-4xl lg:w-8/12 leading-10">{recipeDetails?.name}</h2>
+      <p className="text-xs text-[#eb4a36] italic my-2">{recipeDetails?.category}</p>
+      <p className="text-gray-600 text-sm my-6 leading-6">{recipeDetails?.description}</p>
 
       <div className="flex gap-4 justify-center divide-x my-12">
         <div className="flex-1 text-center">
@@ -19,9 +14,9 @@ export default function AboutRecipes() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="mx-auto"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -29,7 +24,7 @@ export default function AboutRecipes() {
             <path d="M12 7v5l3 3" />
           </svg>
           <h3 className="font-medium text-lg text-gray-700 mt-2">Prep time</h3>
-          <p className="text-gray-500 text-sm">30 minutes</p>
+          <p className="text-gray-500 text-sm">{recipeDetails?.activeTime}</p>
         </div>
         <div className="flex-1 text-center">
           <svg
@@ -39,9 +34,9 @@ export default function AboutRecipes() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="mx-auto"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -50,7 +45,7 @@ export default function AboutRecipes() {
             <path d="M6 4v2a6 6 0 1 0 12 0v-2a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1z" />
           </svg>
           <h3 className="font-medium text-lg text-gray-700 mt-2">Cook time</h3>
-          <p className="text-gray-500 text-sm">1 hour</p>
+          <p className="text-gray-500 text-sm">{recipeDetails?.totalTime}</p>
         </div>
         <div className="flex-1 text-center">
           <svg
@@ -60,9 +55,9 @@ export default function AboutRecipes() {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className="mx-auto"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -72,7 +67,7 @@ export default function AboutRecipes() {
             <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
           </svg>
           <h3 className="font-medium text-lg text-gray-700 mt-2">Servings</h3>
-          <p className="text-gray-500 text-sm">4</p>
+          <p className="text-gray-500 text-sm">{recipeDetails?.serves}</p>
         </div>
       </div>
     </>

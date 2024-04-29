@@ -3,21 +3,21 @@ import AboutRecipes from "./AboutRecipes";
 import RecipeSocialShare from "./RecipeSocialShare";
 import RecipesFavourite from "./RecipesFavourite";
 
-export default function RecipesDetails() {
+export default function RecipesDetails({ recipeDetails }) {
   return (
     <section>
       <div className="grid grid-cols-12 container gap-8 justify-items-center">
         <div className="col-span-12 md:col-span-6">
           <Image
-            src="https://source.unsplash.com/Zh0mYmMBZjQ/600x600"
-            alt="recipe"
+            src={recipeDetails?.thumbnail}
+            alt={recipeDetails?.name}
             width={600}
             height={300}
             className="w-full h-full rounded-lg object-contain"
           />
         </div>
         <div className="col-span-12 md:col-span-6 py-8 flex flex-col justify-center">
-          <AboutRecipes />
+          <AboutRecipes recipeDetails={recipeDetails} />
           <div className="flex gap-4 justify-end">
             <RecipesFavourite />
             <RecipeSocialShare />
