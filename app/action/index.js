@@ -1,5 +1,5 @@
 "use server"
-import { getRecipeDetailsFromDb, getRecipesFromDb } from "@/dbConnect/query";
+import { getCategoryRecipeFromDb, getRecipeDetailsFromDb, getRecipesFromDb } from "@/dbConnect/query";
 
 async function getAllRecipes() {
     try {
@@ -19,5 +19,14 @@ async function getRecipeDetails(recipeId) {
     }
 }
 
-export { getAllRecipes, getRecipeDetails };
+async function getCategoryRecipe(categoryName) {
+    try {
+        const recipeCategory = await getCategoryRecipeFromDb(categoryName);
+        return recipeCategory;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export { getAllRecipes, getCategoryRecipe, getRecipeDetails };
 

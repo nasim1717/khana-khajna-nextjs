@@ -9,7 +9,7 @@ export default function RecipesCard({ recipe }) {
           src={recipe?.thumbnail}
           className="rounded-md"
           alt={recipe?.name}
-          width={300}
+          width={600}
           height={300}
         />
         <h4 className="my-2">{recipe?.name}</h4>
