@@ -7,6 +7,7 @@ import { useState } from "react";
 
 export default function RegisterForm() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [errorHandle, setErrorHandle] = useState({
     firstName: "",
     lastName: "",
@@ -23,7 +24,7 @@ export default function RegisterForm() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+    setLoading(true);
     const isError = validationForm(formInput);
     if (isError) {
       const mergeError = { ...errorHandle, ...isError };
@@ -40,6 +41,7 @@ export default function RegisterForm() {
         throw error;
       }
     }
+    setLoading(false);
   };
 
   return (
@@ -105,7 +107,13 @@ export default function RegisterForm() {
         {!formInput.password && <h1 className="text-red-500">{errorHandle?.password}</h1>}
       </div>
 
-      <button type="submit" className="bg-[#eb4a36] py-3 rounded-md text-white w-full mt-4">
+      <button
+        disabled={loading}
+        type="submit"
+        className={`${
+          loading ? "bg-[#eb4a36] opacity-15" : "bg-[#eb4a36]"
+        }  py-3 rounded-md text-white w-full mt-4`}
+      >
         Create Account
       </button>
     </form>

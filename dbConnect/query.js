@@ -36,14 +36,29 @@ async function findUserFromDb(userEmail) {
 
 async function userLogin(loginData) {
     await connectMongo();
-    const loginUser = await usersModel.findOne({ email: loginData.email, password: loginData.password });
+    const loginUser = await usersModel.findOne({ email: loginData.email, password: loginData.password }).lean();
     return loginUser;
+}
+
+async function updateFavourite(recipeId, authId) {
+    await connectMongo();
+    const message = {};
+    const findRecipe = await recipesModel.findById(recipeId);
+    const findUser = findRecipe?.favourites?.find(id => id === authId);
+    if (findUser) {
+        findRecipe.favourites.pull(authId);
+        message.isFavourite = false;
+    } else {
+        findRecipe.favourites.push(authId);
+        message.isFavourite = true;
+    }
+    findRecipe.save();
+    return message;
 }
 
 export {
     createUsersFromDb, findUserFromDb, getCategoryRecipeFromDb,
     getRecipeDetailsFromDb,
-    getRecipesFromDb,
-    userLogin
+    getRecipesFromDb, updateFavourite, userLogin
 };
 

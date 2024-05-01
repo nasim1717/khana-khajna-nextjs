@@ -45,6 +45,10 @@ const schema = new Schema({
     steps: {
         required: true,
         type: Array
+    },
+    favourites: {
+        required: false,
+        type: Array
     }
 });
 

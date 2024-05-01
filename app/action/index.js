@@ -1,5 +1,6 @@
 "use server"
-import { createUsersFromDb, findUserFromDb, getCategoryRecipeFromDb, getRecipeDetailsFromDb, getRecipesFromDb, userLogin } from "@/dbConnect/query";
+import { createUsersFromDb, findUserFromDb, getCategoryRecipeFromDb, getRecipeDetailsFromDb, getRecipesFromDb, updateFavourite, userLogin } from "@/dbConnect/query";
+import { revalidatePath } from "next/cache";
 
 async function getAllRecipes() {
     try {
@@ -58,7 +59,7 @@ async function performLogin(loginData) {
     try {
         const user = await userLogin(loginData);
         if (user) {
-            message = { success: true, message: "successfully login" }
+            message = { success: true, message: "successfully login", user: user }
         } else {
             const isEmailCorrect = await findUser(loginData?.email);
             if (isEmailCorrect) {
@@ -73,5 +74,15 @@ async function performLogin(loginData) {
     }
 }
 
-export { createUsers, getAllRecipes, getCategoryRecipe, getRecipeDetails, performLogin };
+async function addFavourites(recipeId, authId) {
+    try {
+        const response = await updateFavourite(recipeId, authId);
+        revalidatePath(`/details/${recipeId}`);
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export { addFavourites, createUsers, getAllRecipes, getCategoryRecipe, getRecipeDetails, performLogin };
 

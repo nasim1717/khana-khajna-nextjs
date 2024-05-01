@@ -1,13 +1,16 @@
 "use client";
 
 import { performLogin } from "@/app/action";
+import { AuthConetxt } from "@/contexts";
 import { validationForm } from "@/utils/formValidation";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
 export default function LoginForm() {
+  const { setAuth } = useContext(AuthConetxt);
   const router = useRouter();
   const formRef = useRef(null);
+  const [loading, setLoading] = useState(false);
   const [submitResponse, setSubmitResponse] = useState(false);
   const [errorHandle, setEerroHandle] = useState({
     email: "",
@@ -20,20 +23,29 @@ export default function LoginForm() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const isError = validationForm(formData);
-    if (isError) {
-      const meargError = { ...errorHandle, ...isError };
-      setEerroHandle(meargError);
-      setSubmitResponse(false);
-    } else {
-      const response = await performLogin(formData);
-      if (response?.success) {
-        router.push("/");
+    setLoading(true);
+    try {
+      const isError = validationForm(formData);
+      if (isError) {
+        const meargError = { ...errorHandle, ...isError };
+        setEerroHandle(meargError);
+        setSubmitResponse(false);
       } else {
-        setEerroHandle({ ...errorHandle, email: response?.email, password: response?.password });
-        setSubmitResponse(true);
+        const response = await performLogin(formData);
+        if (response?.success) {
+          setFormData({ email: "", password: "" });
+          setAuth(response?.user);
+          formRef.current.reset();
+          router.push("/");
+        } else {
+          setEerroHandle({ ...errorHandle, email: response?.email, password: response?.password });
+          setSubmitResponse(true);
+        }
       }
+    } catch (error) {
+      throw error;
     }
+    setLoading(false);
   };
 
   return (
@@ -70,7 +82,13 @@ export default function LoginForm() {
           (!formData.password && <h1 className="text-red-500">{errorHandle?.password}</h1>)}
       </div>
 
-      <button type="submit" className="bg-[#eb4a36] py-3 rounded-md text-white w-full mt-4">
+      <button
+        disabled={loading}
+        type="submit"
+        className={`${
+          loading ? "bg-[#eb4a36] opacity-15" : "bg-[#eb4a36]"
+        }  py-3 rounded-md text-white w-full mt-4`}
+      >
         Login
       </button>
     </form>

@@ -19,7 +19,7 @@ export default function RecipesDetails({ recipeDetails }) {
         <div className="col-span-12 md:col-span-6 py-8 flex flex-col justify-center">
           <AboutRecipes recipeDetails={recipeDetails} />
           <div className="flex gap-4 justify-end">
-            <RecipesFavourite />
+            <RecipesFavourite recipeDetails={recipeDetails} />
             <RecipeSocialShare />
           </div>
         </div>

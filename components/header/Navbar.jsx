@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../public/images/logo.png";
+import LoginOut from "./LoginOut";
 
 export default function Navbar() {
   return (
@@ -25,9 +26,7 @@ export default function Navbar() {
             <Link href="/">About us</Link>
           </li>
 
-          <li className="py-2 bg-[#eb4a36] px-6 rounded-md text-white content-center">
-            <Link href="/login">Login</Link>
-          </li>
+          <LoginOut />
         </ul>
       </div>
     </nav>
