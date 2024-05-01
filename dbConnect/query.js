@@ -34,9 +34,16 @@ async function findUserFromDb(userEmail) {
     return user;
 }
 
+async function userLogin(loginData) {
+    await connectMongo();
+    const loginUser = await usersModel.findOne({ email: loginData.email, password: loginData.password });
+    return loginUser;
+}
+
 export {
     createUsersFromDb, findUserFromDb, getCategoryRecipeFromDb,
     getRecipeDetailsFromDb,
-    getRecipesFromDb
+    getRecipesFromDb,
+    userLogin
 };
 

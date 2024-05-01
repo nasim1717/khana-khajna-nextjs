@@ -1,7 +1,7 @@
 "use client";
 
 import { createUsers } from "@/app/action";
-import { registerValidation } from "@/utils/formValidation";
+import { validationForm } from "@/utils/formValidation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -24,7 +24,7 @@ export default function RegisterForm() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    const isError = registerValidation(formInput);
+    const isError = validationForm(formInput);
     if (isError) {
       const mergeError = { ...errorHandle, ...isError };
       setErrorHandle(mergeError);

@@ -1,4 +1,4 @@
-export const registerValidation = (data) => {
+export const validationForm = (data) => {
     const error = {};
     let flagCheckError = false;
     for (let [key, value] of Object.entries(data)) {

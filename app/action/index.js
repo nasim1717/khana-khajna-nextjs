@@ -1,5 +1,5 @@
 "use server"
-import { createUsersFromDb, findUserFromDb, getCategoryRecipeFromDb, getRecipeDetailsFromDb, getRecipesFromDb } from "@/dbConnect/query";
+import { createUsersFromDb, findUserFromDb, getCategoryRecipeFromDb, getRecipeDetailsFromDb, getRecipesFromDb, userLogin } from "@/dbConnect/query";
 
 async function getAllRecipes() {
     try {
@@ -53,5 +53,25 @@ async function findUser(userEmail) {
     }
 }
 
-export { createUsers, getAllRecipes, getCategoryRecipe, getRecipeDetails };
+async function performLogin(loginData) {
+    let message = {};
+    try {
+        const user = await userLogin(loginData);
+        if (user) {
+            message = { success: true, message: "successfully login" }
+        } else {
+            const isEmailCorrect = await findUser(loginData?.email);
+            if (isEmailCorrect) {
+                message = { success: false, password: "Please Enter your correct password" }
+            } else {
+                message = { success: false, email: "Your gmail was not found" }
+            }
+        }
+        return message;
+    } catch (error) {
+        throw error
+    }
+}
+
+export { createUsers, getAllRecipes, getCategoryRecipe, getRecipeDetails, performLogin };
 
