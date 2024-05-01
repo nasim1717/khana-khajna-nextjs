@@ -26,7 +26,7 @@ export default function Navbar() {
           </li>
 
           <li className="py-2 bg-[#eb4a36] px-6 rounded-md text-white content-center">
-            <Link href="/">Login</Link>
+            <Link href="/login">Login</Link>
           </li>
         </ul>
       </div>

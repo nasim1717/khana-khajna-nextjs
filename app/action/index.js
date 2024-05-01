@@ -1,5 +1,5 @@
 "use server"
-import { getCategoryRecipeFromDb, getRecipeDetailsFromDb, getRecipesFromDb } from "@/dbConnect/query";
+import { createUsersFromDb, findUserFromDb, getCategoryRecipeFromDb, getRecipeDetailsFromDb, getRecipesFromDb } from "@/dbConnect/query";
 
 async function getAllRecipes() {
     try {
@@ -28,5 +28,30 @@ async function getCategoryRecipe(categoryName) {
     }
 }
 
-export { getAllRecipes, getCategoryRecipe, getRecipeDetails };
+async function createUsers(userData) {
+    let message = {};
+    try {
+        const isExistUser = await findUser(userData?.email)
+        if (!isExistUser) {
+            await createUsersFromDb(userData);
+            message = { success: true }
+        } else {
+            message = { success: false, email: "Email already exist" }
+        }
+        return message;
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function findUser(userEmail) {
+    try {
+        return await findUserFromDb(userEmail);
+    } catch (error) {
+        throw error;
+    }
+}
+
+export { createUsers, getAllRecipes, getCategoryRecipe, getRecipeDetails };
 

@@ -1,4 +1,5 @@
 import { recipesModel } from "@/models/recipes-models";
+import { usersModel } from "@/models/users-models";
 import mongoose from "mongoose";
 import connectMongo from "./connectMogno";
 
@@ -17,12 +18,24 @@ async function getRecipeDetailsFromDb(recipeId) {
 async function getCategoryRecipeFromDb(categoryName) {
     await connectMongo();
     const recipeCategory = await recipesModel.find({ category: categoryName });
-    console.log("recipeCategory DB-->", recipeCategory);
     return recipeCategory;
 }
 
+
+async function createUsersFromDb(userData) {
+    await connectMongo();
+    const userCreate = await usersModel.create(userData);
+    return userCreate;
+}
+
+async function findUserFromDb(userEmail) {
+    await connectMongo();
+    const user = await usersModel.findOne({ email: userEmail });
+    return user;
+}
+
 export {
-    getCategoryRecipeFromDb,
+    createUsersFromDb, findUserFromDb, getCategoryRecipeFromDb,
     getRecipeDetailsFromDb,
     getRecipesFromDb
 };
