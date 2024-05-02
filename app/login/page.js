@@ -1,6 +1,11 @@
 import LoginForm from "@/components/auth/LoginForm";
 import Link from "next/link";
 
+export const metadata = {
+    title: "khana-Khazana | Login",
+    description: "Sign in to access your favorite recipes and engage with our vibrant culinary community. Join us in exploring the world of flavors!",
+};
+
 export default function LoginPage() {
     return (
         <main className="">

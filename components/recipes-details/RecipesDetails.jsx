@@ -20,7 +20,7 @@ export default function RecipesDetails({ recipeDetails }) {
           <AboutRecipes recipeDetails={recipeDetails} />
           <div className="flex gap-4 justify-end">
             <RecipesFavourite recipeDetails={recipeDetails} />
-            <RecipeSocialShare />
+            <RecipeSocialShare recipeDetails={recipeDetails} />
           </div>
         </div>
       </div>

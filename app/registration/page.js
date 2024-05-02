@@ -2,6 +2,11 @@
 import RegisterForm from "@/components/auth/RegisterForm";
 import Link from "next/link";
 
+export const metadata = {
+    title: "khana-Khazana | Registration",
+    description: "Register now to access a world of recipes and connect with fellow foodies. Start your culinary journey with Khana-Khajna today!",
+};
+
 export default function RegistrationPage() {
     return (
         <main className="">
