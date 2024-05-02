@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import {
   FacebookIcon,
-  FacebookMessengerIcon,
-  FacebookMessengerShareButton,
   FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
   TwitterIcon,
   TwitterShareButton,
   WhatsappIcon,
@@ -68,9 +68,9 @@ export default function RecipeSocialShare({ recipeDetails }) {
                   <WhatsappShareButton url={currentUrl} title={recipeDetails?.name}>
                     <WhatsappIcon size={32} round />
                   </WhatsappShareButton>
-                  <FacebookMessengerShareButton url={currentUrl}>
-                    <FacebookMessengerIcon size={32} round />
-                  </FacebookMessengerShareButton>
+                  <LinkedinShareButton url={currentUrl} title={recipeDetails?.name}>
+                    <LinkedinIcon size={32} round />
+                  </LinkedinShareButton>
                 </div>
                 <button
                   className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
