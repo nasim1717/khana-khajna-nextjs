@@ -14,7 +14,6 @@ export async function generateMetadata({ params, searchParams }, parent) {
         notFound();
     }
 
-
     return {
         title: `khana-khajna | ${recipeDetails?.name}`,
         description: `${recipeDetails?.description?.slice(0, 100)}`,

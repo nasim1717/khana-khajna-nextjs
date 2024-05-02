@@ -1,5 +1,7 @@
+import Loading from "@/components/Loading/Loading";
 import HeroSection from "@/components/home/HeroSection";
 import Recipes from "@/components/home/Recipes";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Khana-Khajna | Culinary Exploration Made Easy",
@@ -10,8 +12,11 @@ export const metadata = {
 export default function HomePage() {
   return (
     <main>
-      <HeroSection />
-      <Recipes />
+      <Suspense fallback={<Loading />}>
+        <HeroSection />
+        <Recipes />
+      </Suspense>
+
     </main>
   );
 }

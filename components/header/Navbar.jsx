@@ -9,7 +9,7 @@ export default function Navbar() {
       <div className="container flex justify-between py-6 ">
         <Link href="/">
           <div className="h-[40px] w-[122.22px] relative">
-            <Image fill src={Logo} alt="Logo" className="object-cover" />
+            <Image fill src={Logo} placeholder="blur" alt="Logo" className="object-cover" />
           </div>
         </Link>
 

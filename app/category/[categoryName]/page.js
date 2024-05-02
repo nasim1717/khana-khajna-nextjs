@@ -1,4 +1,6 @@
+import Loading from "@/components/Loading/Loading";
 import Category from "@/components/category/Category";
+import { Suspense } from "react";
 
 export async function generateMetadata({ params, searchParams }, parent) {
     const categoryName = decodeURIComponent(params.categoryName);
@@ -13,7 +15,10 @@ export default function CategoryPage({ params: { categoryName } }) {
     categoryName = decodeURIComponent(categoryName);
     return (
         <>
-            <Category categoryName={categoryName} />
+            <Suspense fallback={<Loading />}>
+                <Category categoryName={categoryName} />
+            </Suspense>
+
         </>
     );
 }

@@ -1,9 +1,11 @@
+import { getBlurData } from "@/utils/blur-generator";
 import Image from "next/image";
 import AboutRecipes from "./AboutRecipes";
 import RecipeSocialShare from "./RecipeSocialShare";
 import RecipesFavourite from "./RecipesFavourite";
 
-export default function RecipesDetails({ recipeDetails }) {
+export default async function RecipesDetails({ recipeDetails }) {
+  const { base64 } = await getBlurData(recipeDetails?.thumbnail);
   return (
     <section>
       <div className="grid grid-cols-12 container gap-8 justify-items-center">
@@ -13,6 +15,8 @@ export default function RecipesDetails({ recipeDetails }) {
             alt={recipeDetails?.name}
             width={600}
             height={300}
+            placeholder="blur"
+            blurDataURL={base64}
             className="w-full h-full rounded-lg object-contain"
           />
         </div>
