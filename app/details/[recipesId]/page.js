@@ -16,9 +16,9 @@ export async function generateMetadata({ params, searchParams }, parent) {
 
     return {
         title: `khana-khajna | ${recipeDetails?.name}`,
-        description: recipeDetails?.description?.slice(0, 100),
+        description: `${recipeDetails?.description?.slice(0, 100)}`,
         openGraph: {
-            images: "https://source.unsplash.com/random/800x600?recipe",
+            images: `${recipeDetails?.thumbnail}`,
         },
     }
 }
